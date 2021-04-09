@@ -17,7 +17,7 @@ public class HoleMovement : MonoBehaviour
     Mesh mesh;
     List<int> holeVertices;
     List<Vector3> offsets;
-    int holeVerticesCount;
+    //int holeVerticesCount;
 
     [Space]
     [SerializeField] float moveSpeed;
@@ -33,7 +33,7 @@ public class HoleMovement : MonoBehaviour
 
         holeVertices = new List<int>();
         offsets = new List<Vector3>();
-        mesh = meshFilter.mesh;
+        mesh = meshFilter.mesh;        
         FindHoleVertices();
     }
  
@@ -66,7 +66,7 @@ public class HoleMovement : MonoBehaviour
     private void UpdateHoleVerticesPosition()
     {
         Vector3[] vertices = mesh.vertices;
-        for (int i = 0; i < holeVerticesCount; i++)
+        for (int i = 0; i < holeVertices.Count; i++)
         {
             vertices[holeVertices[i]] = holeCenter.position + offsets[i];
         }
@@ -86,7 +86,6 @@ public class HoleMovement : MonoBehaviour
                 offsets.Add(mesh.vertices[i] - holeCenter.position);
             }
         }
-        holeVerticesCount = holeVertices.Count;
     }
 
     
