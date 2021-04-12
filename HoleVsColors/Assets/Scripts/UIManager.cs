@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text currentLevelText;
     [SerializeField] Image progressFillImage;
 
+    [Space]
+    [SerializeField] TMP_Text levelCompletedText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +50,12 @@ public class UIManager : MonoBehaviour
     public void UpdateLevelProgress()
     {
         float val = 1 - ((float)Level.instance.objectInScene / Level.instance.totalObjects);
-        progressFillImage.fillAmount = val;
+        //progressFillImage.fillAmount = val;
+        progressFillImage.DOFillAmount(val, 0.4f);
+    }
+
+    public void ShowLevelCompletedUI()
+    {
+        levelCompletedText.DOFade(1, 0.6f).From(0);
     }
 }
