@@ -32,9 +32,13 @@ public class UIManager : MonoBehaviour
     [Space]
     [SerializeField] TMP_Text levelCompletedText;
 
+    [Space]
+    [SerializeField] Image fadePanel;
+
     // Start is called before the first frame update
     void Start()
     {
+        FadeAtStart();
         SetLevelProgressText();
         progressFillImage.fillAmount = 0;
     }
@@ -57,5 +61,10 @@ public class UIManager : MonoBehaviour
     public void ShowLevelCompletedUI()
     {
         levelCompletedText.DOFade(1, 0.6f).From(0);
+    }
+
+    public void FadeAtStart()
+    {
+        fadePanel.DOFade(0, 1.3f).From(1);
     }
 }

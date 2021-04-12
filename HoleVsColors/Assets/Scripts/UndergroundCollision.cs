@@ -19,6 +19,7 @@ public class UndergroundCollision : MonoBehaviour
                 if(Level.instance.objectInScene == 0)
                 {
                     UIManager.instance.ShowLevelCompletedUI();
+                    Level.instance.PlayWinFx();
                     Invoke("NextLevel", 2);
                 }
             }

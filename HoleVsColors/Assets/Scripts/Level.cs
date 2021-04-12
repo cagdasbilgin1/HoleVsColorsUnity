@@ -18,8 +18,11 @@ public class Level : MonoBehaviour
 
     #endregion
 
-    public int objectInScene;
-    public int totalObjects;
+    [SerializeField] ParticleSystem winFx;
+
+    [Space]
+    [HideInInspector] public int objectInScene;
+    [HideInInspector] public int totalObjects;
     // Start is called before the first frame update
 
     [SerializeField] Transform objectsParent;
@@ -34,6 +37,11 @@ public class Level : MonoBehaviour
     {
         totalObjects = objectsParent.childCount;
         objectInScene = totalObjects;
+    }
+
+    public void PlayWinFx()
+    {
+        winFx.Play();
     }
 
     public void LoadNextLevel()
