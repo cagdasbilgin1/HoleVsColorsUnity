@@ -14,6 +14,9 @@ public class UndergroundCollision : MonoBehaviour
             {
                 Level.instance.objectInScene--;
                 UIManager.instance.UpdateLevelProgress();
+
+                Magnet.instance.RemoveFromMagnetField(other.attachedRigidbody);
+
                 Destroy(other.gameObject);
 
                 if(Level.instance.objectInScene == 0)

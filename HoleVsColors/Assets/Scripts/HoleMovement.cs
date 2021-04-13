@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class HoleMovement : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class HoleMovement : MonoBehaviour
     [SerializeField] Vector2 moveLimits;
     [SerializeField] float radius;
     [SerializeField] Transform holeCenter;
+    [SerializeField] Transform rotatingCircle;
 
     Mesh mesh;
     List<int> holeVertices;
@@ -28,6 +30,7 @@ public class HoleMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RotateCircleAnim();
         Game.isMoving = false;
         Game.isGameOver = false;
 
@@ -35,6 +38,11 @@ public class HoleMovement : MonoBehaviour
         offsets = new List<Vector3>();
         mesh = meshFilter.mesh;        
         FindHoleVertices();
+    }
+
+    void RotateCircleAnim()
+    {
+        rotatingCircle.DORotate(new Vector3(90, 0, -90), 0.2f).SetEase(Ease.Linear).From(new Vector3(90, 0, 0)).SetLoops(-1, LoopType.Incremental);
     }
  
 
@@ -59,7 +67,7 @@ public class HoleMovement : MonoBehaviour
             holeCenter.position + new Vector3(x, 0, y),
             moveSpeed * Time.deltaTime
         );
-        targetPos = new Vector3(Mathf.Clamp(touch.x, -moveLimits.x, moveLimits.x), touch.y, Mathf.Clamp(touch.z, -moveLimits.y, moveLimits.y));
+        targetPos  = new Vector3(Mathf.Clamp(touch.x, -moveLimits.x, moveLimits.x), touch.y, Mathf.Clamp(touch.z, -moveLimits.y, moveLimits.y));
         holeCenter.position = targetPos;
     }
 
