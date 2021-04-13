@@ -49,6 +49,7 @@ public class HoleMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #if UNITY_EDITOR
         Game.isMoving = Input.GetMouseButton(0);
 
         if (!Game.isGameOver && Game.isMoving)
@@ -56,6 +57,16 @@ public class HoleMovement : MonoBehaviour
             MoveHole();
             UpdateHoleVerticesPosition();
         }
+        #else
+        //mobile touch move
+        Game.isMoving = Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved;
+
+        if (!Game.isGameOver && Game.isMoving)
+        {
+            MoveHole();
+            UpdateHoleVerticesPosition();
+        }
+        #endif        
     }
 
     private void MoveHole()
